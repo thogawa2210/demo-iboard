@@ -24,11 +24,16 @@ export function Chart() {
 
   // Create chart options
   const chartOptions = {
+    plotOptions: {
+      series: {
+        enableMouseTracking: false,
+      },
+    },
     chart: {
       backgroundColor: "transparent", // Make the chart background transparent
-    //   borderWidth: 1, // Set the border width to 1 pixel
-    //   borderColor: "grey", // Set the border color to white
-      width: 246, // Specify the desired width of the chart
+      //   borderWidth: 1, // Set the border width to 1 pixel
+      //   borderColor: "grey", // Set the border color to white
+      //   width: 246, // Specify the desired width of the chart
       height: 108, // Specify the desired height of the chart
     },
     subtitle: {
@@ -56,6 +61,7 @@ export function Chart() {
         },
         style: {
           fontSize: "9px", // Set the desired font size for xAxis labels
+          color: "white", //
         },
       },
     },
@@ -69,13 +75,13 @@ export function Chart() {
           enabled: false, // Disable labels on the y-axis
         },
         plotLines: [
-            {
-              value: 50, // Set the threshold value
-              color: 'yellow', // Set the color of the threshold line
-              width: 1, // Set the width of the threshold line
-              zIndex: 5, // Set the zIndex to ensure the line is above the chart
-            },
-          ],
+          {
+            value: 50, // Set the threshold value
+            color: "yellow", // Set the color of the threshold line
+            width: 1, // Set the width of the threshold line
+            zIndex: 5, // Set the zIndex to ensure the line is above the chart
+          },
+        ],
       },
       {
         title: {
@@ -84,9 +90,7 @@ export function Chart() {
         labels: {
           enabled: false, // Disable labels on the y-axis
         },
-        
       },
-      
     ],
     series: [
       {
@@ -94,14 +98,14 @@ export function Chart() {
         type: "line",
         data: generateStockData().map(([x, yLine]) => [x, yLine]),
         zones: [
-            {
-              value: 50, // Set the threshold value
-              color: 'red', // Set the color for values below the threshold
-            },
-            {
-              color: 'green', // Set the color for values above the threshold
-            },
-          ],
+          {
+            value: 50, // Giá trị của phiên giao dịch trước
+            color: "red", // Set the color for values below the threshold
+          },
+          {
+            color: "green", // Set the color for values above the threshold
+          },
+        ],
       },
       {
         name: null,
@@ -112,5 +116,5 @@ export function Chart() {
     ],
   };
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} className="border-6" />;
+  return (<HighchartsReact highcharts={Highcharts} options={chartOptions}/>);
 }
