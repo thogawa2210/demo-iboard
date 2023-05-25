@@ -18,7 +18,7 @@ const stockInfoIcons = {
 
 const IndexInfo = ({data}:any) => {
   return (
-    <div className="text-white text-center mt-auto text-xs">
+    <div className="text-white text-center m-auto text-xs">
       <p>
         <span className="text-orange-700">{data} </span>
         <span className="text-green-500"> 1,053.55 </span>
