@@ -16,11 +16,11 @@ const stockInfoIcons = {
   ),
 };
 
-const IndexInfo = ({ text }: any) => {
+const IndexInfo = ({data}:any) => {
   return (
     <div className="text-white text-center mt-auto text-xs">
       <p>
-        <span className="text-orange-700">VN-INDEX </span>
+        <span className="text-orange-700">{data} </span>
         <span className="text-green-500"> 1,053.55 </span>
         <span className="text-green-500"> 0.66(0.06%) </span>
       </p>
