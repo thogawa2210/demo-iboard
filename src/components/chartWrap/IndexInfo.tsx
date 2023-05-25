@@ -18,7 +18,7 @@ const stockInfoIcons = {
 
 const IndexInfo = ({ text }: any) => {
   return (
-    <div className="text-white text-center mt-4 text-xs">
+    <div className="text-white text-center mt-auto text-xs">
       <p>
         <span className="text-orange-700">VN-INDEX </span>
         <span className="text-green-500"> 1,053.55 </span>
@@ -39,7 +39,7 @@ const IndexInfo = ({ text }: any) => {
         <span>{stockInfoIcons.redArrowDown}</span>
         <span className="text-red-600 mr-2"> 180 </span>
         <span className="text-blue-300 mr-2"> (1) </span>
-        <span> KL Liên tục </span>
+        <span className="truncate"> KL Liên tục </span>
       </div>
     </div>
   );
