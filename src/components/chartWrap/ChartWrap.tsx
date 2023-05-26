@@ -6,7 +6,7 @@ import HighchartsReact from "highcharts-react-official";
 const generateStockData = () => {
   const data = [];
   const startTime = new Date("2023-05-23 09:00:00"); // Start time at 9 am
-  const endTime = new Date("2023-05-23 14:00:00"); // End time at 3 pm
+  const endTime = new Date("2023-05-23 15:00:00"); // End time at 3 pm
   const interval = 10 * 60 * 1000; // 1 hour interval
 
   let currentTime = startTime;
