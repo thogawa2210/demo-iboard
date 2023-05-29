@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
-import TestChart from "./components/chartWrap/TestChart";
+import { useState, useEffect, lazy } from "react";
 import { ChartData } from "./components/dto/chartData";
+import Popup from "./components/modal/Popup";
+
+const TestChart = lazy(() => import('./components/chartWrap/TestChart'))
 
 const startTime = new Date("2023-05-23 09:00:00").getTime();
 const endTime = new Date("2023-05-23 15:00:00").getTime();
@@ -8,7 +10,8 @@ const endTime = new Date("2023-05-23 15:00:00").getTime();
 function App() {
   const [yLine, setyLine] = useState<ChartData[]>([]);
   const [yColumn, setyColumn] = useState<ChartData[]>([]);
-  const [time, setTime] = useState(startTime)
+  const [time, setTime] = useState(startTime);
+  const data = {yLine:yLine, yColumn:yColumn}
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,7 +36,9 @@ function App() {
 
   return (
     <div className="bg-black">
-      <TestChart yLine={yLine} yColumn={yColumn} />
+      {/* <TestChart yLine={yLine} yColumn={yColumn} /> */}
+
+      <Popup chartComponent={TestChart} chartProps={data} />
     </div>
   );
 }

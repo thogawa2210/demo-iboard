@@ -21,11 +21,13 @@ const TestChart = ({ yLine, yColumn } :any) => {
         plotOptions: {
           series: {
             enableMouseTracking: false,
+            animation: false,
           },
         },
         chart: {
           backgroundColor: "transparent", // Make the chart background transparent
           // height: 108, // Specify the desired height of the chart
+          animation: false,
         },
         subtitle: {
           text: null, // Set the subtitle to null to hide it
