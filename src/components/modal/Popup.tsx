@@ -1,45 +1,35 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, lazy } from "react";
 
 interface PopupProps {
-    chartComponent: React.LazyExoticComponent<React.ComponentType<any>>;
-    chartProps?: React.ComponentProps<any>;
-  }
+  isOpen: boolean;
+  onClose: () => void;
+  component: React.ComponentType<any> | null;
+  componentProps?: any;
+}
 
-const Popup: React.FC<PopupProps> = ({ chartComponent: LazyComponent, chartProps}) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openPopup = () => {
-    setIsOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsOpen(false);
-  };
+const LazyComponent = ({ Component, componentProps }: { Component: React.ComponentType<any>; componentProps: any }) => {
+  const LazyLoadedComponent = lazy(() => import(`./components/${Component}`));
 
   return (
-    <>
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-        onClick={openPopup}
-      >
-        Open Popup
-      </button>
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyLoadedComponent {...componentProps} />
+    </Suspense>
+  );
+};
 
+const Popup: React.FC<PopupProps> = ({ isOpen, onClose, component: Component, componentProps }) => {
+  return (
+    <>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white w-1/2 p-6 rounded-lg shadow-lg">
             <div className="flex justify-end">
-              <button
-                className="text-gray-500 hover:text-gray-700"
-                onClick={closePopup}
-              >
+              <button className="text-gray-500 hover:text-gray-700" onClick={onClose}>
                 Close
               </button>
             </div>
             <div className="mt-4">
-              <Suspense fallback={<div>Loading...</div>}>
-                <LazyComponent {...chartProps}/>
-              </Suspense>
+            {Component && <LazyComponent Component={Component} componentProps={componentProps} />}
             </div>
           </div>
         </div>

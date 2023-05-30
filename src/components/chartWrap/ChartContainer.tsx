@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ChartWrap from "./ChartWrap";
 import TopTrade from "./TopTrade";
 import TopTradeForeign from "./TopTradeForeign";
@@ -24,8 +25,9 @@ const topTradeForeign: any[] = [
 ];
 
 const ChartContainer = () => {
+
   return (
-    <div className="grid grid-cols-10 gap-1 h-44 p-1 bg-black">
+    <div className="grid grid-cols-10 gap-1 h-44 p-1 bg-black w-full">
       <div className="col-span-6 bg-black rounded h-full flex overflow-x-auto gap-1 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-zinc-500 scrollbar-track-transparent">
         <ChartWrap data={"VNINDEX"} />
         <ChartWrap data={"VN30"} />
