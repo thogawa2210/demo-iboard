@@ -1,18 +1,36 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useEffect, useState } from "react";
+import { ChartData } from "../dto/chartData";
 
 const startTime = new Date("2023-05-23 09:00:00").getTime();
 const endTime = new Date("2023-05-23 15:00:00").getTime();
 
-const TestChart = ({ yLine, yColumn } :any) => {
-  const [dataLine, setDataLine] = useState([]);
-  const [dataColumn, setDataColumn] = useState([]);
+const TestChart = () => {
+  const [yLine, setyLine] = useState<ChartData[]>([]);
+  const [yColumn, setyColumn] = useState<ChartData[]>([]);
+  const [time, setTime] = useState(startTime);
 
   useEffect(() => {
-    setDataColumn(yColumn);
-    setDataLine(yLine);
-  }, [yLine, yColumn]);
+    const interval = setInterval(() => {
+      if(time <= endTime ){
+        const x = time;
+        const line = Math.random() * 100;
+        const column = Math.random() * 200;
+
+        setyLine((prev:any) => [...prev, [x, line]]);
+        setyColumn((prev: any) => [...prev, [x, column]]);
+        setTime((prevTime) => prevTime + 60*1000);
+      }else{
+        clearInterval(interval);
+      }
+    },1000)
+
+    return () => {
+      // Cleanup function to clear the interval when component unmounts
+      clearInterval(interval);
+    };
+  },[time])
 
   return (
     <HighchartsReact
@@ -91,7 +109,7 @@ const TestChart = ({ yLine, yColumn } :any) => {
           {
             name: null,
             type: "line",
-            data: dataLine,
+            data: yLine,
             zones: [
               {
                 value: 50, // Giá trị của phiên giao dịch trước
@@ -106,7 +124,7 @@ const TestChart = ({ yLine, yColumn } :any) => {
             name: null,
             type: "column",
             yAxis: 1,
-            data: dataColumn,
+            data: yColumn,
           },
         ],
       }}

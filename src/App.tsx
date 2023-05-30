@@ -1,44 +1,56 @@
-import { useState, useEffect, lazy } from "react";
-import { ChartData } from "./components/dto/chartData";
-import Popup from "./components/modal/Popup";
+import { useState, useEffect, lazy, useRef, Suspense } from "react";
 
-const TestChart = lazy(() => import('./components/chartWrap/TestChart'))
-
-const startTime = new Date("2023-05-23 09:00:00").getTime();
-const endTime = new Date("2023-05-23 15:00:00").getTime();
+const TestChart = lazy(() => import("./components/chartWrap/TestChart"));
 
 function App() {
-  const [yLine, setyLine] = useState<ChartData[]>([]);
-  const [yColumn, setyColumn] = useState<ChartData[]>([]);
-  const [time, setTime] = useState(startTime);
-  const data = {yLine:yLine, yColumn:yColumn}
+  const ref = useRef<any>(null);
+  const [show, toggle] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if(time <= endTime ){
-        const x = time;
-        const line = Math.random() * 100;
-        const column = Math.random() * 200;
+    if (!ref.current) {
+      return;
+    }
 
-        setyLine((prev:any) => [...prev, [x, line]]);
-        setyColumn((prev: any) => [...prev, [x, column]]);
-        setTime((prevTime) => prevTime + 60*1000);
-      }else{
-        clearInterval(interval);
-      }
-    },1000)
-
-    return () => {
-      // Cleanup function to clear the interval when component unmounts
-      clearInterval(interval);
-    };
-  },[time])
+    if (show) {
+      ref.current.showModal();
+    } else {
+      ref.current.close();
+    }
+  }, [ref, show]);
 
   return (
-    <div className="bg-black">
-      {/* <TestChart yLine={yLine} yColumn={yColumn} /> */}
-
-      <Popup chartComponent={TestChart} chartProps={data} />
+    <div className="">
+      <button className="p-2 bg-blue-500 text-white rounded m-1" onClick={() => toggle(!show)}>
+        Open
+      </button>
+      <dialog
+        ref={ref}
+        // className={`dialog ${show ? "open opacity-100" : "opacity-0"}`}
+        onClick={(e) => {
+          const dialogDimensions = ref.current.getBoundingClientRect();
+          if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+          ) {
+            toggle(false);
+            ref.current.close();
+          }
+        }}
+      >
+        {/* <ChartContainer /> */}
+        <Suspense fallback={<div>Loading...</div>}>
+          {show && (
+            <div className="w-screen">
+              <TestChart />
+            </div>
+          )}
+        </Suspense>
+        <button className="p-2 bg-red-500 text-white rounded m-1" onClick={() => toggle(!show)}>
+          Close
+        </button>
+      </dialog>
     </div>
   );
 }
