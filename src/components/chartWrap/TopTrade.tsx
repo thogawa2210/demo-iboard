@@ -3,15 +3,21 @@ const TopTrade = ({ data }: any) => {
     <>
       <div className="h-[28px] border-b-2 border-black bg-transparent flex">
         <div className="h-full bg-green-600 w-1"></div>
-        <p className="leading-[28px] text-[11px] text-white pl-1 truncate">Top KL giao dịch trong ngày</p>
+        <p className="leading-[28px] text-[11px] text-white pl-1 truncate">
+          Top KL giao dịch trong ngày
+        </p>
       </div>
       <div className="text-white text-[12px]">
         <div className="table w-full pr-2">
           <div className="table-header-group">
             <div className="table-row h-[28px] leading-[28px]">
-              <div className="table-cell w-1/3 text-left pl-1 truncate">Mã CK</div>
+              <div className="table-cell w-1/3 text-left pl-1 truncate">
+                Mã CK
+              </div>
               <div className="table-cell w-1/3 text-right truncate">KL</div>
-              <div className="table-cell w-1/3 text-right truncate">Giá khớp</div>
+              <div className="table-cell w-1/3 text-right truncate">
+                Giá khớp
+              </div>
             </div>
           </div>
         </div>
@@ -22,8 +28,12 @@ const TopTrade = ({ data }: any) => {
               {data.map((stock: any) => (
                 <div className="table-row bg-zinc-900 even:bg-black h-[26px] leading-[26px]">
                   <div className="table-cell w-1/3 pl-2">{stock.symbol}</div>
-                  <div className="table-cell w-1/3 text-right">{stock.value}</div>
-                  <div className={`table-cell w-1/3 text-right ${stock.color}`}>{stock.price}</div>
+                  <div className="table-cell w-1/3 text-right">
+                    {stock.value}
+                  </div>
+                  <div className={`table-cell w-1/3 text-right ${stock.color}`}>
+                    {stock.price}
+                  </div>
                 </div>
               ))}
             </div>

@@ -24,15 +24,20 @@ const topTradeForeign: any[] = [
   { symbol: "STB", value1: "307,80", value2: "1,421,20", price: 10.1, color: "text-red-500" },
 ];
 
+const dataObject = {
+  name: 'John Doe',
+  number: 123,
+};
+
 const ChartContainer = () => {
 
   return (
     <div className="grid grid-cols-10 gap-1 h-44 p-1 bg-black w-full">
       <div className="col-span-6 bg-black rounded h-full flex overflow-x-auto gap-1 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-zinc-500 scrollbar-track-transparent">
-        <ChartWrap data={"VNINDEX"} />
-        <ChartWrap data={"VN30"} />
-        <ChartWrap data={"HNX30"} />
-        <ChartWrap data={"HNX"} />
+        <ChartWrap data={{name: "VN30", number : 2}} />
+        <ChartWrap data={{name: "VN30", number : 2}} />
+        <ChartWrap data={{name: "HNX30", number : 3}} />
+        <ChartWrap data={{name: "HNX", number : 4}} />
       </div>
 
       <div className="col-span-2 rounded bg-zinc-900">

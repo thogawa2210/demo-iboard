@@ -1,3 +1,5 @@
+import { IIndexInfo } from "./ChartWrap";
+
 const stockInfoIcons = {
   greenArrowUp: (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" viewBox="0 0 16 16">
@@ -16,11 +18,12 @@ const stockInfoIcons = {
   ),
 };
 
-const IndexInfo = ({data}:any) => {
+const IndexInfo = ({name, number}:IIndexInfo) => {
+  
   return (
     <div className="text-white text-center m-auto text-xs w-full">
       <p>
-        <span className="text-orange-700">{data} </span>
+        <span className="text-orange-700">{name}</span>
         <span className="text-green-500"> 1,053.55 </span>
         <span className="text-green-500"> 0.66(0.06%) </span>
       </p>
@@ -33,7 +36,7 @@ const IndexInfo = ({data}:any) => {
       <div className="flex items-center justify-center">
         <span>{stockInfoIcons.greenArrowUp}</span>
         <span className="text-green-500 mr-2"> 154 </span>
-        <span className="text-purple-600 mr-2"> (1) </span>
+        <span className="text-purple-600 mr-2"> ({number}) </span>
         <span>{stockInfoIcons.yellowSquare}</span>
         <span className="text-yellow-400 mr-2"> 63 </span>
         <span>{stockInfoIcons.redArrowDown}</span>

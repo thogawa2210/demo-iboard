@@ -1,6 +1,6 @@
-import IndexInfo from "./IndexInfo";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import IndexInfo from "./IndexInfo";
 
 // Generate fake data for stock prices
 const generateStockData = () => {
@@ -118,11 +118,16 @@ const chartOptions = {
   ],
 };
 
-const ChartWrap = ({data}:any) => {
+export interface IIndexInfo {
+  name: string;
+  number: number;
+}
+
+const ChartWrap = (data: IIndexInfo) => {
   return (
     <div className="h-full w-full bg-zinc-900 min-w-[200px] rounded flex flex-col">
-      <HighchartsReact highcharts={Highcharts} options={chartOptions}/>
-      <IndexInfo data={data}/>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <IndexInfo name={data.name} number={data.number} />
     </div>
   );
 };
