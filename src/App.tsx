@@ -1,9 +1,10 @@
-import Tab from "./components/tab/Tab";
+import Chart from "./components/chartWrap/Chart";
 
 function App() {
+  
   return (
     <div className="bg-black">
-      <Tab />
+      <Chart />
     </div>
   );
 }
