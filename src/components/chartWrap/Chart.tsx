@@ -4,7 +4,6 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 
 const today = new Date();
-// today.setHours(today.getHours() + 7); // Áp dụng chênh lệch múi giờ GMT+7
 const year = today.getFullYear();
 const month = today.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0, nên cộng thêm 1
 const day = today.getDate();
@@ -48,7 +47,6 @@ const chartOptions = (data) => {
         formatter: function (
           this: Highcharts.AxisLabelsFormatterContextObject
         ) {
-          console.log(startTime, endTime)
           const date = new Date(this.value);
           const hour = date.getHours();
           return hour + "h";
